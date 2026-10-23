@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#8ec9ff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>RoboGolf</title>
+    <script type="module" crossorigin src="./assets/index-CHQxuFcQ.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BH7B8OTC.css">
+  </head>
+  <body>
+    <canvas id="scene"></canvas>
+    <div id="ui">
+      <header class="top">
+        <div class="pill coins"><span class="coin"></span><b id="coins">0</b></div>
+        <div class="wind" id="wind">
+          <div class="wind-dial"><div class="wind-arrow" id="wind-arrow"></div></div>
+          <span id="wind-text">0 mph</span>
+        </div>
+        <div class="pill best"><small>BEST</small><b id="best">0</b><small>ft</small></div>
+      </header>
+
+      <div id="live" class="live hidden">
+        <div id="live-dist">0</div>
+        <div class="unit">FEET</div>
+        <div id="live-tag" class="live-tag"></div>
+      </div>
+
+      <div id="contact" class="contact"></div>
+      <div id="milestone" class="milestone"></div>
+      <div id="zone-banner" class="zone-banner"></div>
+      <div id="speed-lines" class="speed-lines"></div>
+      <div id="boost-pop" class="boost-pop"></div>
+
+      <!-- The swing meters appear when a swing starts and stay up until it connects. -->
+      <div id="meters" class="meters hidden">
+        <div id="power" class="power gauge">
+          <div class="power-track"><div class="power-fill" id="power-fill"></div></div>
+          <div class="meter-label">POWER</div>
+        </div>
+
+        <div id="accuracy" class="accuracy gauge">
+          <div class="acc-track">
+            <div class="acc-zone good" id="acc-good"></div>
+            <div class="acc-zone great" id="acc-great"></div>
+            <div class="acc-zone perfect" id="acc-perfect"></div>
+            <div class="acc-needle" id="acc-needle"></div>
+          </div>
+          <div class="acc-labels"><span>HOOK</span><span>SLICE</span></div>
+        </div>
+
+        <div class="left-gauges">
+          <div id="spin" class="spin gauge">
+            <div class="spin-end">TOP</div>
+            <div class="spin-track">
+              <div class="spin-zone good" id="spin-good"></div>
+              <div class="spin-zone perfect" id="spin-perfect"></div>
+              <div class="spin-needle" id="spin-needle"></div>
+            </div>
+            <div class="spin-end">BACK</div>
+            <div class="meter-label">SPIN</div>
+          </div>
+
+          <div id="angle" class="angle gauge">
+            <div class="angle-dial" id="angle-dial">
+              <span class="angle-high">HIGH</span>
+              <span class="angle-low">LOW</span>
+              <div class="angle-needle" id="angle-needle"></div>
+              <div class="angle-hub"></div>
+            </div>
+            <div class="meter-label">ANGLE</div>
+          </div>
+        </div>
+      </div>
+      <div id="slider-grade" class="slider-grade"></div>
+
+      <div id="prompt" class="prompt">Hold anywhere to swing</div>
+      <div id="ff" class="ff hidden">Hold to fast-forward ▸▸</div>
+      <button id="boost-btn" class="boost-btn hidden">🚀 BOOST<small id="boost-left"></small></button>
+
+      <div class="bottom-left">
+        <button id="shop-btn" class="btn shop-btn">Shop<span class="dot hidden" id="shop-dot"></span></button>
+        <button id="skills-btn" class="btn skills-btn">Skills<span class="dot hidden" id="skills-dot"></span></button>
+        <button id="awards-btn" class="btn awards-btn" aria-label="Achievements">🏆<span class="dot hidden" id="awards-dot"></span></button>
+      </div>
+      <button id="mute-btn" class="icon-btn" aria-label="Toggle sound">🔊</button>
+      <button id="privacy-btn" class="icon-btn hidden" aria-label="Privacy choices">🛡️</button>
+
+      <div id="result" class="sheet hidden">
+        <div class="card result">
+          <div class="res-title" id="res-title">Nice shot</div>
+          <div class="res-dist"><span id="res-total">0</span><small>ft</small></div>
+          <div class="res-sub" id="res-sub"></div>
+          <div class="res-rows">
+            <div><span>Carry</span><b id="res-carry">0 ft</b></div>
+            <div><span>Contact</span><b id="res-contact">-</b></div>
+            <div><span>Peak height</span><b id="res-apex">0 ft</b></div>
+          </div>
+          <div class="res-coins" id="res-coins-row">+<b id="res-coins">0</b> <span class="coin"></span></div>
+          <button id="res-double" class="btn ad-btn hidden">🎬 Watch an ad: <b>2× coins</b></button>
+          <div class="res-xp">
+            <span class="res-lvl">Lv <b id="res-level">1</b></span>
+            <div class="xp-track"><div class="xp-fill" id="res-xp-fill"></div></div>
+            <b id="res-xp">+0 XP</b>
+          </div>
+          <div class="res-bonuses">
+            <div class="res-bonus levelup hidden" id="res-levelup">⭐ <span id="res-levelup-text">Level up!</span> <b id="res-levelup-amount">+1 point</b></div>
+            <div class="res-bonus levelup hidden" id="res-unlock">🎯 <span id="res-unlock-text">New slider!</span></div>
+            <div class="res-bonus hidden" id="res-fairway">⛳ Fairway <b id="res-fairway-amount">+0</b></div>
+            <div class="res-bonus hidden" id="res-zone">🗺️ New zone <b id="res-zone-amount">+0</b></div>
+            <div class="res-bonus hidden" id="res-milestones">🚩 Distance <b id="res-milestones-amount">+0</b></div>
+            <div class="res-bonus hidden" id="res-bonus">🏆 Record <b id="res-bonus-amount">+0</b></div>
+          </div>
+          <div class="res-buttons">
+            <button id="res-shop" class="btn secondary">Shop<span class="dot hidden" id="res-dot"></span></button>
+            <button id="res-skills" class="btn skills">Skills<span class="dot hidden" id="res-skills-dot"></span></button>
+            <button id="res-next" class="btn primary">Next shot</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="shop" class="shop hidden">
+        <div id="shop-panel" class="shop-panel">
+          <div class="shop-top">
+            <div class="shop-head">
+              <h2>Shop</h2>
+              <div class="pill coins"><span class="coin"></span><b id="shop-coins">0</b></div>
+              <button id="shop-close" class="icon-btn close" aria-label="Close">✕</button>
+            </div>
+            <div class="tabs">
+              <button class="tab" id="tab-monsters">Monsters</button>
+              <button class="tab" id="tab-clubs">Clubs</button>
+              <button class="tab" id="tab-gear">Gear</button>
+            </div>
+          </div>
+          <div class="shop-est">Perfect hit right now: <b id="shop-est">0 ft</b></div>
+          <div id="shop-list" class="shop-list"></div>
+        </div>
+      </div>
+
+      <div id="skills" class="shop hidden">
+        <div id="skills-panel" class="shop-panel skills-panel">
+          <div class="shop-top">
+            <div class="shop-head">
+              <h2>Skills</h2>
+              <div class="pill points"><b id="skill-points">0</b><small>points</small></div>
+              <button id="skills-close" class="icon-btn close" aria-label="Close">✕</button>
+            </div>
+            <div class="level-row">
+              <span class="level-label">Level <b id="skill-level">1</b></span>
+              <div class="xp-track"><div class="xp-fill" id="skill-xp-fill"></div></div>
+              <small id="skill-xp-text">0 / 40 XP</small>
+            </div>
+            <div class="tabs four">
+              <button class="tab" id="stab-power">Power</button>
+              <button class="tab" id="stab-fortune">Fortune</button>
+              <button class="tab" id="stab-precision">Precision</button>
+              <button class="tab" id="stab-abilities">Abilities</button>
+            </div>
+          </div>
+          <div class="shop-est" id="skills-note">Every shot earns XP, and every level is a skill point.</div>
+          <div id="skill-list" class="skill-list"></div>
+          <button id="skills-reset" class="btn ghost skills-reset hidden">Reset skills (free)</button>
+        </div>
+      </div>
+
+      <div id="awards" class="shop hidden">
+        <div id="awards-panel" class="shop-panel awards-panel">
+          <div class="shop-top">
+            <div class="shop-head">
+              <h2>Achievements</h2>
+              <div class="pill coins" id="awards-coins-pill"><span class="coin"></span><b id="awards-coins">0</b></div>
+              <button id="awards-close" class="icon-btn close" aria-label="Close">✕</button>
+            </div>
+            <div class="awards-summary">
+              <span><b id="awards-done">0</b> / <span id="awards-total">0</span> complete</span>
+              <button id="awards-claim-all" class="btn primary claim-all hidden">Claim all</button>
+            </div>
+          </div>
+          <div id="award-list" class="skill-list award-list"></div>
+        </div>
+      </div>
+
+      <!-- After an ad between shots: offer the Remove Ads purchase. -->
+      <div id="noads" class="noads hidden">
+        <div class="card noads-card">
+          <div class="noads-badge">🚫</div>
+          <h3>Play ad-free?</h3>
+          <p>Remove the ads between shots for good. The optional 2× coin videos stay, for whenever you want them.</p>
+          <button id="noads-buy" class="btn primary noads-buy">Remove ads · <span id="noads-price"></span></button>
+          <button id="noads-skip" class="btn ghost noads-skip">No thanks</button>
+          <button id="noads-restore" class="noads-restore">Restore purchase</button>
+        </div>
+      </div>
+
+      <button id="ach-toast" class="ach-toast" aria-label="Open achievements">
+        <span class="ach-toast-icon" id="ach-toast-icon">🏆</span>
+        <span class="ach-toast-text"><small id="ach-toast-title">Achievement unlocked!</small><b id="ach-toast-name"></b></span>
+      </button>
+    </div>
+  </body>
+</html>

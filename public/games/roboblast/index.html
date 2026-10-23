@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#8ec9ff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>RoboBlast</title>
+    <script type="module" crossorigin src="./assets/index-DYtbqP4p.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BMowD2_L.css">
+  </head>
+  <body>
+    <canvas id="scene"></canvas>
+    <div id="ui">
+      <div id="float" class="float"></div>
+      <div id="vignette" class="vignette"></div>
+
+      <div id="hud" class="hud hidden">
+        <header class="top">
+          <button id="pause-btn" class="icon-btn" aria-label="Pause">❚❚</button>
+          <div class="pill wave-pill"><small id="wave-label">WAVE</small><b id="wave">1</b><small id="wave-of">/ 3</small></div>
+          <div class="pill score-pill"><b id="score">0</b></div>
+        </header>
+        <div id="boss-bar" class="boss-bar hidden">
+          <div class="boss-name" id="boss-name">GIGAMECH</div>
+          <div class="boss-track"><div class="boss-fill" id="boss-fill"></div></div>
+        </div>
+
+        <div class="drag-pad" id="drag-pad"><span>◀</span><small>DRAG TO MOVE</small><span>▶</span></div>
+
+        <div class="skills">
+          <button class="skill" id="skill-0" aria-label="Skill 1"><span class="skill-icon"></span><span class="skill-lock"></span></button>
+          <button class="skill" id="skill-1" aria-label="Skill 2"><span class="skill-icon"></span><span class="skill-lock"></span></button>
+        </div>
+
+        <footer class="bottom">
+          <div class="hp" id="hp">
+            <div class="hp-icon">♥</div>
+            <div class="hp-track"><div class="hp-fill" id="hp-fill"></div></div>
+            <b id="hp-text">100</b>
+          </div>
+          <div class="ammo" id="ammo"></div>
+        </footer>
+      </div>
+
+      <div id="banner" class="banner"></div>
+      <div id="hint" class="hint"></div>
+
+      <div id="title" class="title hidden">
+        <button class="pill title-level" id="title-level" aria-label="Character level and skills">
+          <b id="title-lv">Lv 1</b>
+          <span class="xp-track"><span class="xp-fill" id="title-xp"></span></span>
+        </button>
+        <div class="pill title-coins" aria-label="Coins"><i class="coin"></i><b id="title-coins">0</b></div>
+        <div class="logo">
+          <div class="logo-main">Robo<span>Blast</span></div>
+          <div class="logo-sub">Rocket robot vs. the chibi horde</div>
+        </div>
+        <div class="sheet">
+          <div class="shop-btns">
+            <button id="skills-btn" class="shop-btn skill-tree" aria-label="Skills">
+              <span class="shop-ring">
+                <svg viewBox="0 0 48 48" aria-hidden="true">
+                  <g stroke="#1d2433" stroke-width="3" stroke-linejoin="round">
+                    <path d="M24 4 L29.5 17 L43 18 L32.5 27 L36 41 L24 33.5 L12 41 L15.5 27 L5 18 L18.5 17 Z" fill="#ffd23f" />
+                  </g>
+                </svg>
+              </span>
+              <span class="shop-label">Skills</span>
+            </button>
+            <button id="armor-btn" class="shop-btn armor" aria-label="Armor">
+              <span class="shop-ring">
+                <svg viewBox="0 0 48 48" aria-hidden="true">
+                  <g stroke="#1d2433" stroke-width="3" stroke-linejoin="round">
+                    <path d="M8 31 C8 16 15 6 24 6 C33 6 40 16 40 31 V37 C40 40 38 42 35 42 H13 C10 42 8 40 8 37 Z" fill="#dfe3e8" />
+                    <path d="M20 8 C21 5 27 5 28 8 L27 21 H21 Z" fill="#c23a4a" />
+                    <path d="M12 23 H36 V29 C36 31 35 32 33 32 H15 C13 32 12 31 12 29 Z" fill="#ff7a2a" />
+                    <path d="M18 37 H30" fill="none" />
+                  </g>
+                </svg>
+              </span>
+              <span class="shop-label">Armor</span>
+            </button>
+            <button id="weapon-btn" class="shop-btn weapon" aria-label="Weapon">
+              <span class="shop-ring">
+                <svg viewBox="0 0 48 48" aria-hidden="true">
+                  <g transform="rotate(45 24 24)" stroke="#1d2433" stroke-width="3" stroke-linejoin="round">
+                    <path d="M20 37 L24 46 L28 37 Z" fill="#ffd23f" />
+                    <path d="M17 26 L10 34 L10 40 L17 35 Z" fill="#ff7a2a" />
+                    <path d="M31 26 L38 34 L38 40 L31 35 Z" fill="#ff7a2a" />
+                    <path d="M24 3 C32 9 34 22 31 37 H17 C14 22 16 9 24 3 Z" fill="#fffdf4" />
+                    <path d="M24 3 C28 6 30.5 10 31.5 14 H16.5 C17.5 10 20 6 24 3 Z" fill="#ff7a2a" />
+                    <circle cx="24" cy="23" r="4" fill="#3d8bff" />
+                  </g>
+                </svg>
+              </span>
+              <span class="shop-label">Weapon</span>
+            </button>
+          </div>
+          <div class="card level-card">
+            <div class="stage-path" id="stage-path" role="group" aria-label="Stages"></div>
+            <div class="level-row">
+              <div class="level-title"><span class="level-tag" id="title-stage">STAGE 1</span><span class="level-name" id="title-name">Green Meadow</span></div>
+              <div class="level-best" id="title-best"></div>
+            </div>
+            <div class="how">
+              <span class="touch-only"><b>Tap</b> to fire</span>
+              <span class="touch-only"><b>Drag</b> to run</span>
+              <span class="desk-only"><b>Space</b> to fire</span>
+              <span class="desk-only"><b>WASD</b> to run</span>
+              <span id="title-boss">Boss: <b>Gigamech</b></span>
+            </div>
+            <button id="play-btn" class="btn primary play-btn">Play</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="pause" class="overlay hidden">
+        <div class="card pause-card">
+          <h2>Paused</h2>
+          <button id="resume-btn" class="btn primary">Resume</button>
+          <button id="restart-btn" class="btn secondary">Restart</button>
+          <button id="mute-btn" class="btn ghost">Sound: On</button>
+          <button id="quit-btn" class="btn ghost">Quit to title</button>
+        </div>
+      </div>
+
+      <div id="shop" class="overlay hidden">
+        <div class="card shop-card">
+          <header class="shop-head">
+            <h2 id="shop-title">Weapon</h2>
+            <div class="coins"><i class="coin"></i><b id="shop-coins">0</b></div>
+            <button id="shop-close" class="close-btn" aria-label="Close">✕</button>
+          </header>
+          <div class="tree" id="shop-tree"></div>
+          <div class="shop-detail" id="shop-detail">
+            <canvas id="shop-preview" class="shop-preview" aria-hidden="true"></canvas>
+            <div class="shop-info" id="shop-info"></div>
+            <button id="shop-action" class="btn detail-btn"></button>
+          </div>
+        </div>
+      </div>
+
+      <div id="skills-screen" class="overlay hidden">
+        <div class="card skills-card">
+          <header class="shop-head">
+            <h2>Skills</h2>
+            <span class="lv-badge" id="skills-lv">Lv 1</span>
+            <button id="skills-close" class="close-btn" aria-label="Close">✕</button>
+          </header>
+          <div class="skills-tabs" id="skills-tabs"></div>
+          <div class="skills-active" id="skills-active"></div>
+          <div class="skills-sub">Passive <small>always on once unlocked</small></div>
+          <div class="skills-passive" id="skills-passive"></div>
+        </div>
+      </div>
+
+      <div id="result" class="sheet hidden">
+        <div class="card result">
+          <div class="res-title" id="res-title">Victory!</div>
+          <div class="res-stars" id="res-stars"><span>★</span><span>★</span><span>★</span></div>
+          <div class="res-score"><span id="res-score">0</span></div>
+          <div class="res-sub" id="res-sub"></div>
+          <div class="res-rows">
+            <div><span>Bots blasted</span><b id="res-kills">0</b></div>
+            <div><span>Accuracy</span><b id="res-acc">0%</b></div>
+            <div><span>Time</span><b id="res-time">0:00</b></div>
+            <div class="res-coins"><span>Coins</span><b id="res-coins">+0</b></div>
+          </div>
+          <div class="res-xp">
+            <span class="lv-badge" id="res-lv">Lv 1</span>
+            <div class="res-xp-bar">
+              <span class="xp-track"><span class="xp-fill" id="res-xp-fill"></span></span>
+              <div class="res-xp-text"><b id="res-xp-gain">+0 XP</b><span id="res-xp-note"></span></div>
+            </div>
+          </div>
+          <div class="res-unlock hidden" id="res-unlock"></div>
+          <div class="res-buttons">
+            <button id="res-next" class="btn primary hidden">Next stage</button>
+            <button id="res-retry" class="btn primary">Retry</button>
+            <button id="res-weapon" class="btn secondary">Weapon</button>
+            <button id="res-armor" class="btn secondary armor">Armor</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

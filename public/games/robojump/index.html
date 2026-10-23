@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#8ec9ff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>RoboJump</title>
+    <script type="module" crossorigin src="./assets/index-w9XeUD4D.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-YrXTE_QY.css">
+  </head>
+  <body>
+    <canvas id="scene"></canvas>
+    <div id="ui">
+      <div id="hud" class="hud hidden">
+        <header class="top">
+          <button id="pause-btn" class="icon-btn" aria-label="Pause">II</button>
+          <div class="pill floor-pill"><small>FLOOR</small><b id="floor">0</b></div>
+          <div class="pill score-pill"><b id="score">0</b></div>
+        </header>
+
+        <div id="combo" class="combo">
+          <div class="combo-count"><b id="combo-floors">0</b><small>COMBO</small></div>
+          <div class="combo-track"><div class="combo-fill" id="combo-fill"></div></div>
+        </div>
+        <div id="speed" class="speed"><small>SPEED</small><div class="speed-dots" id="speed-dots"></div></div>
+
+        <div class="pad" id="pad" aria-label="Run left or right">
+          <span class="pad-half pad-left">◀</span>
+          <span class="pad-half pad-right">▶</span>
+        </div>
+        <button id="jump-btn" class="jump-btn" aria-label="Jump">JUMP</button>
+      </div>
+
+      <div id="pop" class="pop"></div>
+      <div id="banner" class="banner"></div>
+
+      <div id="title" class="title hidden">
+        <div class="pill title-best" aria-label="Best floor"><small>BEST</small><b id="title-best">0</b></div>
+        <div class="pill title-coins" aria-label="Coins"><i class="coin"></i><b id="title-coins">0</b></div>
+        <div class="logo">
+          <div class="logo-main">Robo<span>Jump</span></div>
+          <div class="logo-sub">How high can your robot climb?</div>
+        </div>
+        <div class="sheet">
+          <div class="card title-card">
+            <div class="title-stats">
+              <div><small>Best score</small><b id="title-score">0</b></div>
+              <div><small>Best floor</small><b id="title-floor">0</b></div>
+              <div><small>Best combo</small><b id="title-combo">0</b></div>
+            </div>
+            <div class="how">
+              <span class="touch-only"><b>◀ ▶</b> run</span>
+              <span class="touch-only"><b>Jump</b> button</span>
+              <span class="desk-only"><b>←/→</b> run</span>
+              <span class="desk-only"><b>Space</b> jump</span>
+              <span>Faster = <b>higher</b></span>
+            </div>
+            <div class="title-buttons">
+              <button id="skins-btn" class="btn secondary">Skins</button>
+              <button id="play-btn" class="btn primary play-btn">Play</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="pause" class="overlay hidden">
+        <div class="card pause-card">
+          <h2>Paused</h2>
+          <button id="resume-btn" class="btn primary">Resume</button>
+          <button id="restart-btn" class="btn secondary">Restart</button>
+          <button id="mute-btn" class="btn ghost">Sound: On</button>
+          <button id="quit-btn" class="btn ghost">Quit to title</button>
+        </div>
+      </div>
+
+      <div id="skins" class="sheet hidden">
+        <div class="card skins-card">
+          <header class="shop-head">
+            <h2>Skins</h2>
+            <div class="pill coins"><i class="coin"></i><b id="skins-coins">0</b></div>
+            <button id="skins-close" class="close-btn" aria-label="Close">✕</button>
+          </header>
+          <div class="skin-grid" id="skin-grid"></div>
+          <div class="skin-detail">
+            <div class="skin-name" id="skin-name">Raider</div>
+            <button id="skin-action" class="btn primary">Worn</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="result" class="sheet hidden">
+        <div class="card result">
+          <div class="res-title" id="res-title">Game Over</div>
+          <div class="res-best hidden" id="res-best">New best!</div>
+          <div class="res-score"><span id="res-score">0</span></div>
+          <div class="res-rows">
+            <div><span>Floor</span><b id="res-floor">0</b></div>
+            <div><span>Best combo</span><b id="res-combo">0</b></div>
+            <div><span>Time</span><b id="res-time">0:00</b></div>
+            <div class="res-coins"><span>Coins</span><b id="res-coins">+0</b></div>
+          </div>
+          <div class="res-buttons">
+            <button id="res-retry" class="btn primary">Retry</button>
+            <button id="res-skins" class="btn secondary">Skins</button>
+            <button id="res-home" class="btn ghost">Home</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

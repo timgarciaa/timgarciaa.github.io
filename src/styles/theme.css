@@ -1,0 +1,62 @@
+/* Semantic tokens, all derived from palette.css. Don't hard-code colors elsewhere. */
+:root,
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: color-mix(in oklab, var(--light-1) 45%, white);
+  --bg-alt: color-mix(in oklab, var(--light-2) 45%, white);
+  --surface: color-mix(in oklab, var(--light-1) 15%, white);
+  --fg: var(--brand-ink);
+  --muted: color-mix(in oklab, var(--brand-ink) 65%, var(--bg));
+  --line: color-mix(in oklab, var(--light-3) 45%, transparent);
+  --accent: var(--light-4);
+  --accent-strong: var(--light-3);
+  --accent-fg: var(--brand-ink);
+  --hot: var(--light-4);
+  --glow: color-mix(in oklab, var(--light-3) 60%, transparent);
+  --invert-bg: var(--brand-ink);
+  --invert-fg: color-mix(in oklab, var(--light-1) 30%, white);
+  /* Hero photo duotone: highlights and shadows. */
+  --duo-hi: var(--light-2);
+  --duo-lo: var(--light-4);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: color-mix(in oklab, var(--brand-ink) 94%, var(--brand-deep));
+  --bg-alt: color-mix(in oklab, var(--brand-ink) 86%, var(--brand-deep));
+  --surface: color-mix(in oklab, var(--brand-ink) 80%, var(--brand-deep));
+  --fg: color-mix(in oklab, var(--brand-hot) 6%, white);
+  --muted: color-mix(in oklab, var(--fg) 58%, var(--bg));
+  --line: color-mix(in oklab, white 12%, transparent);
+  --accent: var(--brand-hot);
+  --accent-strong: var(--brand-mid);
+  --accent-fg: white;
+  --hot: var(--brand-hot);
+  --glow: color-mix(in oklab, var(--brand-hot) 45%, transparent);
+  --invert-bg: color-mix(in oklab, var(--brand-hot) 6%, white);
+  --invert-fg: var(--brand-ink);
+  --duo-hi: var(--brand-hot);
+  --duo-lo: var(--brand-deep);
+}
+
+/* Follow the OS until the visitor picks a theme. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --bg: color-mix(in oklab, var(--brand-ink) 94%, var(--brand-deep));
+    --bg-alt: color-mix(in oklab, var(--brand-ink) 86%, var(--brand-deep));
+    --surface: color-mix(in oklab, var(--brand-ink) 80%, var(--brand-deep));
+    --fg: color-mix(in oklab, var(--brand-hot) 6%, white);
+    --muted: color-mix(in oklab, var(--fg) 58%, var(--bg));
+    --line: color-mix(in oklab, white 12%, transparent);
+    --accent: var(--brand-hot);
+    --accent-strong: var(--brand-mid);
+    --accent-fg: white;
+    --hot: var(--brand-hot);
+    --glow: color-mix(in oklab, var(--brand-hot) 45%, transparent);
+    --invert-bg: color-mix(in oklab, var(--brand-hot) 6%, white);
+    --invert-fg: var(--brand-ink);
+    --duo-hi: var(--brand-hot);
+    --duo-lo: var(--brand-deep);
+  }
+}

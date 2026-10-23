@@ -1,0 +1,18 @@
+/*
+ * Brand palettes — the only colors you need to edit.
+ * Every surface, text, border and glow in the site is mixed from these
+ * (see theme.css).
+ */
+:root {
+  /* Dark mode (also the robot, the arcade mode and the dark game section). */
+  --brand-ink: #000000;  /* darkest: text, dark backgrounds */
+  --brand-deep: #830000; /* deep accent: shadows, pressed states */
+  --brand-mid: #bc0202;  /* main accent */
+  --brand-hot: #ff0000;  /* highlight: glows, hovers, easter eggs */
+
+  /* Light mode, lightest to strongest. */
+  --light-1: #ffe3a9; /* cream: page background */
+  --light-2: #ffc3c3; /* blush: alternate background, borders */
+  --light-3: #ff8c8c; /* salmon: glows, secondary accent */
+  --light-4: #ff5d5d; /* coral: main accent, buttons */
+}
