@@ -44,6 +44,14 @@ export function Credentials() {
               </div>
             </div>
           </button>
+          <a
+            href={featuredCert.verifyUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-ghost mt-5"
+          >
+            Verify on Credly <span aria-hidden>↗</span>
+          </a>
         </Reveal>
 
         <div className="flex flex-col gap-10">

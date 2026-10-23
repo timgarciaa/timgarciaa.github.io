@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
-import { profile } from '../content.ts';
+import { featuredCert, profile } from '../content.ts';
 import { useReducedMotion } from '../hooks/useReducedMotion.ts';
 
 function SplitWord({ text, delay }: { text: string; delay: number }) {
@@ -82,9 +82,15 @@ export function Hero() {
             </p>
 
             <div className="mt-6 flex flex-wrap gap-2">
-              <span className="chip border-accent/40 font-medium">
-                <AwsMark /> AWS Certified Developer – Associate
-              </span>
+              <a
+                href={featuredCert.verifyUrl}
+                target="_blank"
+                rel="noreferrer"
+                title="Verify on Credly"
+                className="chip border-accent/40 font-medium hover:border-accent hover:text-accent"
+              >
+                <AwsMark /> {featuredCert.title} <span aria-hidden>↗</span>
+              </a>
               <span className="chip text-muted">{profile.location}</span>
             </div>
 

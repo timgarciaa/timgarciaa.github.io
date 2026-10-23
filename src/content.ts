@@ -49,6 +49,7 @@ export const featuredCert = {
   issuer: 'Amazon Web Services Training and Certification',
   blurb:
     'Building, deploying and debugging cloud-native apps on AWS: Lambda, DynamoDB, API Gateway, IAM, CI/CD and monitoring.',
+  verifyUrl: 'https://www.credly.com/badges/cc4fb21b-d7ad-42bd-8670-9f5c78ac310a',
 };
 
 export const trainings: { title: string; issuer: string; date: string }[] = [
